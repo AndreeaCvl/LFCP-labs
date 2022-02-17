@@ -47,19 +47,19 @@ class NFA:
 
 
 class DFA:
-    # define a NFA class to parse the initial input and represent the NFA
+    # define a DFA class to parse store the DFA and the functions for converting the NFA to DFA
 
-    def __init__(self, dfa):
+    def __init__(self, nfa):
         """
             The constructor of the DFA
-                :param dfa: dict
+                :param nfa: dict
                     The NFA to convert
         """
 
         # Setting up the hyper-parameters
         self.T = None
         self.Q = None
-        self._dfa = dfa
+        self._nfa = nfa
 
     def convert(self):
         """
@@ -80,7 +80,7 @@ class DFA:
 
             # Add q0 to Q and transitions of start state q0 to the transition table T
             self.Q.append('q0')
-            self.T['q0'] = self._dfa['q0']
+            self.T['q0'] = self._nfa['q0']
             print(f'Step 2: T = {self.T}')
             print('Step 3:')
             add_new_states('q0')
@@ -101,11 +101,10 @@ class DFA:
                 if len(state) == 2:
                     if state not in self.Q:
                         self.Q.append(state)
-                        self.T[state] = self._dfa[state]
-                        last_added = list(self.T.keys())[-1]
+                        self.T[state] = self._nfa[state]
 
                         # calling the function recursively for a new added state
-                        add_new_states(last_added)
+                        add_new_states(state)
 
                 elif len(state) > 2:
                     # in case of nondeterminism (multiple states for a single transition)
@@ -139,14 +138,13 @@ class DFA:
                     dest = ''
 
                     for state in set_of_states:
-                        if len(self._dfa[state][key]) == 2:
-                            set_of_dest.add(self._dfa[state][key])
-                        elif len(self._dfa[state][key]) > 2:
+                        if len(self._nfa[state][key]) == 2:
+                            set_of_dest.add(self._nfa[state][key])
+                        elif len(self._nfa[state][key]) > 2:
                             i = 0
-                            dest_states = set()
 
-                            while i < len(self._dfa[state][key]):
-                                s = self._dfa[state][key][i] + self._dfa[state][key][i + 1]
+                            while i < len(self._nfa[state][key]):
+                                s = self._nfa[state][key][i] + self._nfa[state][key][i + 1]
                                 set_of_dest.add(s)
                                 i += 2
 
