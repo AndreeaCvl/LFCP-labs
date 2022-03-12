@@ -1,0 +1,25 @@
+G = {Sn, St, S, P}
+Sn = {	<program>, <function>, <id>, <arg>, <expression>, <char>, <string>, <int>
+	<declaration>, <function_call>, <array>, <var>, <value>, <operator>, <digit>, <return> }
+St = {	func, return, (, ), {, }, [, ], arr, ", let, =, a..z, A..Z, 0..9, +, -, ,}
+
+note: the * symbol after a notation means that notation may be repetitive.
+
+P = {
+	<program> -> <function>*
+	<function> -> func <id>(<arg>*) { <expression>* <return>}
+	<id> -> <char>*
+	<arg> -> <id> | <string> | <int>
+	<expression> -> <declaration> | <function_call>
+	<return> -> return <id>
+	<declaration> -> <function> | <array> | <var>
+	<array> -> arr <id> = [<value>*]
+	<value>-> <int> | <string> | <int><operator><int>
+	<int> -> <digit>*
+	<string> -> "<char>*"	
+	<var> -> let <id> = <value>
+	<function_call> -> <id>(<arg>*)
+	<char> -> a|b|..|z|A|B|..|Z|0|1..|9
+	<digit> -> 0|1|..|9
+	<operator> -> +|-
+}
