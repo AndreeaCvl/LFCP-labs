@@ -1,10 +1,10 @@
-func main ( ) {
+func main(){
 let numar1 = 17
 let numar2 = 100 - 20
-arr numere = [ 1, 2, 3, 4, "verde" ]
-func add ( num1, num2 ) {
+arr numere = [1, 2, 3, 4, "verde"]
+func add(num1, num2) {
 suma = num1 + num2
 return suma
 }
-add ( numar1, numar2 )
+add(numar1, numar2)
 }
