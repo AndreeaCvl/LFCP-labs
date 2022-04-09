@@ -1,0 +1,5 @@
+S -> aD 
+D -> bE
+E -> cF | dL
+F -> dD
+L -> aL | bL | c 
